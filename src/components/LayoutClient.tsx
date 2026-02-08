@@ -16,11 +16,15 @@ const LayoutClient: React.FC = () => {
   const mode = useStore(viewMode);
   const [isMobile, setIsMobile] = React.useState(true); // Default to true for SSR/mobile-first
 
+  const CONVEX_URL =
+    import.meta.env.PUBLIC_CONVEX_URL ?? process.env.PUBLIC_CONVEX_URL;
+
+  if (!CONVEX_URL) {
+    throw new Error("PUBLIC_CONVEX_URL is not defined");
+  }
+
   // Create Convex client once (memoized to avoid recreation on re-renders)
-  const convex = React.useMemo(
-    () => new ConvexReactClient(import.meta.env.PUBLIC_CONVEX_URL),
-    [],
-  );
+  const convex = React.useMemo(() => new ConvexReactClient(CONVEX_URL), []);
 
   React.useEffect(() => {
     // Use matchMedia for accurate breakpoint detection (matches Tailwind's md: 768px)
@@ -37,7 +41,10 @@ const LayoutClient: React.FC = () => {
 
   return (
     <ClerkProvider
-      publishableKey={import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY}
+      publishableKey={
+        import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY ||
+        process.env.PUBLIC_CLERK_PUBLISHABLE_KEY
+      }
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <div className="flex flex-col h-full overflow-hidden">

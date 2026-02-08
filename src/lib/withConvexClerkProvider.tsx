@@ -3,11 +3,16 @@ import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { useAuth } from "@clerk/astro/react";
 
-if (!import.meta.env.PUBLIC_CONVEX_URL) {
-  throw new Error("Missing PUBLIC_CONVEX_URL in your .env.local file");
+const CONVEX_URL =
+  import.meta.env.PUBLIC_CONVEX_URL || process.env.PUBLIC_CONVEX_URL;
+
+if (!CONVEX_URL) {
+  throw new Error(
+    "Missing PUBLIC_CONVEX_URL. Please set it in your environment variables.",
+  );
 }
 
-const convex = new ConvexReactClient(import.meta.env.PUBLIC_CONVEX_URL);
+const convex = new ConvexReactClient(CONVEX_URL);
 
 export function withConvexClerkProvider<Props>(
   Component: FunctionComponent<Props>,
@@ -19,5 +24,6 @@ export function withConvexClerkProvider<Props>(
       </ConvexProviderWithClerk>
     );
   }
+
   return WithConvexClerkProvider;
 }
