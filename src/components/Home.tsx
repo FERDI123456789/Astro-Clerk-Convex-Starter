@@ -6,7 +6,7 @@ import "@/styles/global.css";
 import { motion } from "framer-motion";
 import { useAuth } from "@clerk/astro/react";
 import { toast } from "sonner";
-import { useState, useCallback } from "react"; // Add useCallback
+import { useState } from "react";
 import SearchInput from "@/components/SearchInput";
 import { highlightText } from "@/helpers/highLightText";
 
@@ -45,9 +45,6 @@ export function HomeComponent() {
   const [search, setSearch] = useState("");
   const [showOnlyUpvoted, setShowOnlyUpvoted] = useState(false);
   const [showOnlyDownvoted, setShowOnlyDownvoted] = useState(false);
-  const [filteredMessages, setFilteredMessages] = useState(
-    publicMessages || [],
-  );
 
   const isMessageVisible = (msg: any) => {
     if (
@@ -66,9 +63,6 @@ export function HomeComponent() {
   const visibleMessages = (publicMessages || []).filter(isMessageVisible);
 
   const { isSignedIn } = useAuth(); // Check if user is signed in
-
-  // Memoize getText to prevent new reference on each render
-  const getText = useCallback((message: any) => message.text, []);
 
   console.log(viewMode.value);
 

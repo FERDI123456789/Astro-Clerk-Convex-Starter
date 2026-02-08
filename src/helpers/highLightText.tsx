@@ -1,5 +1,3 @@
-import React from "react"; // optional but ensures JSX types
-
 export function highlightText(text: string, search: string) {
   if (!search) return text; // No search, return normal text
 

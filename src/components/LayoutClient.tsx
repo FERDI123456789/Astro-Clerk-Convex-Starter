@@ -1,5 +1,5 @@
 // components/LayoutClient.tsx
-import React, { useState } from "react";
+import React from "react";
 import { useStore } from "@nanostores/react";
 import { viewMode } from "@/stores/viewStore";
 import { HomeComponent } from "@/components/Home"; // Unwrapped

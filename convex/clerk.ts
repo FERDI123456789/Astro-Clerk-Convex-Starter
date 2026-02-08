@@ -1,4 +1,5 @@
-import { httpAction, ActionCtx } from "./_generated/server";
+import { httpAction } from "./_generated/server";
+import type { ActionCtx } from "./_generated/server";
 import { Webhook } from "svix";
 import { internal } from "./_generated/api";
 

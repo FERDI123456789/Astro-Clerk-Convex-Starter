@@ -18,6 +18,7 @@ export default defineConfig({
   integrations: [react(), clerk()],
 
   vite: {
+    // @ts-ignore
     plugins: [tailwindcss()],
   },
   server: { port: 7878 },

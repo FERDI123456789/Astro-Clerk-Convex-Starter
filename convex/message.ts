@@ -1,8 +1,6 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
 
-type Role = "admin" | "standard";
-
 export const updateUserRoleOnMessages = mutation({
   args: {
     userId: v.string(),

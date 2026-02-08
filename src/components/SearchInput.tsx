@@ -1,5 +1,3 @@
-import { useEffect } from "react"; // Remove if unused after this
-
 interface SearchInputProps {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;

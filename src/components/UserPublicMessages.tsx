@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { withConvexClerkProvider } from "../lib/withConvexClerkProvider";
@@ -7,22 +7,14 @@ import {
   ThumbsUp,
   MessageSquare,
   User,
-  Calendar,
-  MapPin,
-  Edit,
   Trash2,
   Pin,
 } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useAuth } from "@clerk/astro/react";
 import SearchInput from "@/components/SearchInput"; // Adjust path as needed
 import { highlightText } from "@/helpers/highLightText";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface UserProfileComponentProps {
   userId: string;
@@ -51,10 +43,7 @@ function SkeletonMessage() {
   );
 }
 
-function UserPublicMessagesComponent({
-  userId,
-  fromId,
-}: UserProfileComponentProps) {
+function UserPublicMessagesComponent({ userId }: UserProfileComponentProps) {
   const publicMessages = useQuery(api.messages.listUserPublicMessages, {
     userId,
   });
@@ -87,9 +76,6 @@ function UserPublicMessagesComponent({
   const [sortByUpvotes, setSortByUpvotes] = useState(false);
   const [showOnlyPinned, setShowOnlyPinned] = useState(false);
   const [filteredMessages, setFilteredMessages] = useState<any[]>([]);
-
-  // Memoize getText to prevent new reference on each render
-  const getText = useCallback((message: any) => message.text, []);
 
   // Update filteredMessages when publicMessages changes
   useEffect(() => {
@@ -324,7 +310,7 @@ function UserPublicMessagesComponent({
                         </div>
 
                         {/* Content */}
-                        <p className="text-gray-800 leading-relaxed break-words break-all whitespace-pre-wrap">
+                        <p className="text-gray-800 leading-relaxed wrap-break-words break-all whitespace-pre-wrap">
                           {highlightText(message.text, search)}
                         </p>
 

@@ -1,22 +1,13 @@
-import React, { useState } from "react";
-import {
-  SignInButton,
-  UserButton,
-  SignedIn,
-  ClerkLoading,
-  SignedOut,
-  SignUpButton,
-} from "@clerk/astro/react";
-import { Pin, Trash, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { SignedIn, SignedOut } from "@clerk/astro/react";
+import { Pin, Trash2 } from "lucide-react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { withConvexClerkProvider } from "../lib/withConvexClerkProvider";
 import { useConvexAuth } from "convex/react"; // Add this
-import { User } from "lucide-react";
 import "@/styles/global.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { highlightText } from "@/helpers/highLightText";
-import { useCallback } from "react"; // Add useCallback for getText memoization
 
 function SkeletonMessage() {
   return (
@@ -49,11 +40,6 @@ export function PrivateMessagesSignedIn() {
 
   const [search, setSearch] = useState("");
   const [showOnlyPinned, setShowOnlyPinned] = useState(false);
-  // Note: Don't initialize with privateMessages here—it may be undefined initially.
-  // Use an effect if you need to sync it, but your current usage seems fine without this state.
-  const [filteredMessages, setFilteredMessages] = useState([]);
-
-  const messagesToRender = privateMessages || [];
 
   const isMessageVisible = (msg: any) => {
     if (
@@ -69,9 +55,6 @@ export function PrivateMessagesSignedIn() {
   };
 
   const visibleMessages = (privateMessages || []).filter(isMessageVisible);
-
-  // Memoize getText to prevent new reference on each render
-  const getText = useCallback((message: any) => message.text, []);
 
   return (
     <main className="w-full mx-auto bg-white h-full flex flex-col overflow-hidden">
@@ -185,13 +168,10 @@ export function PrivateMessagesSignedIn() {
   );
 }
 
-import { Button } from "@/components/ui/button";
 import {
   Empty,
-  EmptyContent,
   EmptyDescription,
   EmptyHeader,
-  EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
 import SearchInput from "./SearchInput";

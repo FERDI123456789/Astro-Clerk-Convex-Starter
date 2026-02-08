@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { Globe, Lock, Rocket, WholeWord } from "lucide-react";
+import { Globe, Lock, Rocket } from "lucide-react";
 import { viewMode } from "@/stores/viewStore";
 import { withConvexClerkProvider } from "@/lib/withConvexClerkProvider";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/astro/react";
 import { useAuth } from "@clerk/astro/react";
 import { toast } from "sonner"; // Import toast for warnings
 

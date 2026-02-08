@@ -2,7 +2,7 @@ import { query, mutation, internalMutation } from "./_generated/server";
 import { v } from "convex/values";
 import { RateLimiter, SECOND } from "@convex-dev/rate-limiter"; // Import here
 import { components } from "./_generated/api"; // Add if missing
-import { Id } from "./_generated/dataModel"; // Add this import to resolve the Id type
+import type { Id } from "./_generated/dataModel"; // Add this import to resolve the Id type
 
 type Role = "admin" | "standard";
 
