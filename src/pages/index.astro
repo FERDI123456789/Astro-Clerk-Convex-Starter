@@ -1,0 +1,14 @@
+---
+import "../styles/global.css";
+import Home from "../components/Home.tsx";
+import Layout from "../layouts/Layout.astro";
+import UserPrivateMessages from "../components/PrivateMessages.tsx";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/astro/components";
+import MessageInputOP from "@/components/MessageInput";
+import ClientLayout from "@/components/LayoutClient";
+import { ClientRouter } from "astro:transitions";
+---
+
+<Layout>
+  <ClientLayout client:only />
+</Layout>
