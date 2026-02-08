@@ -1,1 +1,0 @@
-import{r}from"../index.Buf-CL2u.js";import"../chunk-5RWUYJKV.DT1PUBwP.js";import"../loadClerkJsScript-Dz_r2Obb.DorIIEnD.js";await r({sdkMetadata:{version:"2.17.1",name:"@clerk/astro",environment:"production"}});
